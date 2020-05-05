@@ -24,6 +24,7 @@ def function4():
 	a = np.ones((10,10))
 	a[1:-1, 1:-1] = 0
 	print(a)
+	#np.pad
 
 def function5():
 	a = np.zeros((10, 10))
@@ -36,6 +37,7 @@ def function6(n):
 	for x in array:
 		array[x]=(x%n)+(x/n)
 	print(array.reshape((n,n)))
+	#np.fromfunctio
 
 
 def function7():
@@ -43,6 +45,7 @@ def function7():
 	print(np.sum(a))
 	print(np.sum(a,0))
 	print(np.sum(a,1))
+	#a.sum()
 
 def function8():
 	a = np.random.rand(5,5)
