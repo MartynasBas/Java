@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div>
+            <div>
+              <p>
+                Patvirtinta {{act.company_title}} direktoriaus <br>
+                {{act.act_date}} isakymu Nr. {{act.order_no}} <br>
+                <b>Tvirtinu:</b><br>
+                {{act.company_title}} direktorius <br>
+                {{act.act_date}}
+              </p>
+            </div>
+            <div '>
+                <p >{{act.company_title}}<br>MATERIALINIU VERTYBIU NURASYMO AKTAS</p>
+            </div>
+        <div>
+        <div>
+            Komisija patvirtinta {{act.act_date}} isakymu  Nr. {{act.order_no}} "Del komisijos sudarymo materialiniu vertybiu nurasymui", komisijos pirmininkas {% for commissioner in act.commissioners.all %}
+              {{commissioner}},
+              {% endfor %} nustate,  kad  per  {{act.act_date}} {{act.location}} sunaudojo:
+              <table border="1">
+                <tr>
+                  <th>Title</th>
+                  <th>Amount type</th>
+                  <th>Amount</th>
+                  <th>Cost</th>
+                  <th>Sum</th>
+                  <th>Area</th>
+                </tr>
+                {% for good in act.goods.all %}
+                <tr>
+                  <td>{{good.name}}</td>
+                  <td>{{good.unit}}</td>
+                  <td>{{good.amount}}</td>
+                  <td>{{good.cost}}</td>
+                  <td>{{good.total_sum}}</td>
+                  <td>{{good.purpose}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                  <td>Total:</td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td>{{total}}</td>
+                  <td> </td>
+                </tr>
+            </table>
+            <p>
+              Pagal pirkimo dokumentus:{{act.seller_name}} PVM s.f. {{act.serial_id}} Nr. {{act.serial_no}}, {{act.act_date}}<br>
+              Nariai<br>
+              {% for commissioner in act.commissioners.all %}
+              {{commissioner}} <br>
+              {% endfor %}
+              Mat. atsakingas <br>
+              {{act.responsible_worker}}
+
+            </p>
+        </div>
+    </div>
+    </body>
+</html>

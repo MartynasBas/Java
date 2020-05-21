@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+
+{% if form %}
+    <h1 class="display-4">Form ID = {{ form.id }}</h1>
+    <p class="font-weight-normal">Company: {{ form.company_title }}</p>
+    <p class="font-weight-normal">Order number: {{ form.order_no }}</p>
+    <p class="font-weight-normal">Act date: {{ form.act_date }}</p>
+    <p class="font-weight-normal">Location: {{ form.location }}</p>
+    <p class="font-weight-normal">Seller Company: {{ form.seller_company_title }}</p>
+    <p class="font-weight-normal">Serial ID: {{ form.serial_id }}</p>
+    <p class="font-weight-normal">Serial number: {{ form.serial_no }}</p>
+    <p class="font-weight-normal">Responsable
+        worker: {{ form.responsible_worker.first_name }} {{ form.responsible_worker.last_name }}</p>
+{% endif %}
+
+{% if goods %}
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Total_sum</th>
+        <th scope="col">Purpose</th>
+    </tr>
+    </thead>
+
+        {% for good in goods %}
+            <tbody>
+            <tr>
+                <th scope="col">{{ good.id }}</th>
+                <th scope="col">{{ good.name }}</th>
+                <th scope="col">{{ good.unit }}</th>
+                <th scope="col">{{ good.amount }}</th>
+                <th scope="col">{{ good.cost }}</th>
+                <th scope="col">{{ good.total_sum }}</th>
+                <th scope="col">{{ good.purpose }}</th>
+            </tr>
+            </tbody>
+        {% endfor %}
+
+</table>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>{{ newForm.name.label_tag }}</label>
+        <input class="form-control" id="{{ newForm.name.id_for_label }}"
+               name="{{ newForm.name.html_name }}"
+               value="{{ newForm.name.value | default_if_none:"" }}"/>
+    </div>
+    <div class="form-group">
+        <label>{{ newForm.unit.label_tag }}</label>
+        <input class="form-control" id="{{ newForm.unit.id_for_label }}"
+               name="{{ newForm.unit.html_name }}"
+               value="{{ newForm.unit.value | default_if_none:"" }}"
+               />
+    </div>
+    <div class="form-group">
+        <label>{{ newForm.amount.label_tag }}</label>
+        <input class="form-control" id="{{ newForm.amount.id_for_label }}"
+               name="{{ newForm.amount.html_name }}"
+               value="{{ newForm.amount.value | default_if_none:"" }}"
+                type="number"/>
+    </div>
+    <div class="form-group">
+        <label>{{ newForm.cost.label_tag }}</label>
+        <input class="form-control" id="{{ newForm.cost.id_for_label }}"
+               name="{{ newForm.cost.html_name }}"
+               value="{{ newForm.cost.value | default_if_none:"" }}"
+        type="number"/>
+    </div>
+    <div class="form-group">
+        <label>{{ newForm.purpose.label_tag }}</label>
+        <input class="form-control" id="{{ newForm.purpose.id_for_label }}"
+               name="{{ newForm.purpose.html_name }}"
+               value="{{ newForm.purpose.value | default_if_none:"" }}"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{#<a class="btn btn-primary btn-xs" style="float: right; margin-top: -2px;" href="{% url 'downloadpdf' object.id %}">Show in pdf</a>#}
+{% if form %}
+<form action="http://127.0.0.1:8000/forms/formView/{{ form.id }}/pdf-download/">
+    <input type="submit" class="btn btn-primary" value="PDF" />
+</form>
+{% endif %}
+{#    <form>#}
+{#        {{ newForm }}#}
+{#    </form>#}
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

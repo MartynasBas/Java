@@ -1,0 +1,38 @@
+body {
+font-weight: 200;
+font-size: 14px;
+font-family: serif;
+}
+.header {
+font-size: 15px;
+font-weight: bold;
+text-align: center;
+color: #000;
+}
+.title {
+/* text-align: right;*/
+padding: 10px 20px 0px 20px;
+}
+.title span {
+color: #000;
+}
+.details {
+padding: 10px 20px 0px 20px;
+text-align: left !important;
+/*margin-left: 40%;*/
+}
+.hrItem {
+border: none;
+height: 1px;
+color: #000; 
+background-color: #fff; 
+}
+.preheader {
+text-align: left;
+font-size: 12px;
+
+}
+.preheader-div {
+float: right;
+display: flex;
+}
